@@ -1,0 +1,122 @@
+"Extraordinary LMS for RTU Students in PHP CodeIgniter + MySQL (Tailwind CSS)"
+
+Project Overview:
+Build a fully functional Learning Management System (LMS) for Rajasthan Technical University (RTU) students. The system should allow topic-wise categorized learning content (videos, notes, etc.) to be uploaded and managed by multiple roles (Admin, Content Manager, etc.) and consumed by students in an organized, user-friendly way.
+
+Core Requirements:
+
+Technology Stack:
+
+Backend: PHP CodeIgniter Framework
+
+Database: MySQL
+
+Frontend: HTML5, Tailwind CSS (responsive design, utility-first)
+
+Video Integration: YouTube embedding + custom video hosting option
+
+User Roles & Panels:
+
+Admin Panel:
+
+Full system control
+
+Create/manage subjects, topics, subtopics
+
+Assign content managers
+
+Approve or reject uploaded content
+
+Manage students & permissions
+
+Content Manager Panel:
+
+Upload videos (YouTube embed or custom)
+
+Upload PDFs/notes/slides
+
+Tag content by subject, topic, semester
+
+Manage & edit uploaded resources
+
+Student Panel:
+
+View subject-wise and topic-wise content
+
+Access videos, notes, and related materials
+
+Search and filter by topic, subject, semester
+
+Bookmark/save favorite resources
+
+Content Structure:
+
+Semester → Subject → Topic → Subtopic
+
+Each unit contains:
+
+Video (YouTube link or uploaded file)
+
+Notes (PDF/Doc)
+
+Optional extra resources
+
+Features:
+
+Role-Based Access Control (RBAC)
+
+Advanced Search & Filters
+
+Responsive UI using Tailwind CSS
+
+SEO-friendly URLs
+
+Analytics Dashboard (views, most-used resources, etc.)
+
+Secure Login System (password hashing, session security)
+
+Download Restriction or Tracking for notes
+
+Database Design (example structure):
+
+users (id, name, email, password_hash, role)
+
+subjects (id, name, semester)
+
+topics (id, subject_id, name)
+
+content (id, topic_id, title, description, type[video/note], file_url, youtube_url, created_by)
+
+bookmarks (id, student_id, content_id)
+
+activity_log (id, user_id, action, timestamp)
+
+Extra Functions (optional but impactful):
+
+Quiz & Assignment Section (future expansion)
+
+Comment & Discussion Forum per topic
+
+Progress Tracking (percentage completion per subject)
+
+Email Notifications for new uploads
+
+Design Guidelines:
+
+Use Tailwind CSS for all layouts and styling (utility-first approach)
+
+Mobile-first responsive design
+
+Minimal & clean UI for all user panels
+
+Consistent color palette for branding (admin, content manager, and student sections can have slight variations in theme colors)
+
+Expected Deliverables:
+
+Full CodeIgniter project source code
+
+MySQL database schema
+
+Admin, Content Manager, and Student interfaces
+
+Fully tested system with dummy RTU syllabus data

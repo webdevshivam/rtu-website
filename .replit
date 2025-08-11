@@ -6,3 +6,15 @@ channel = "stable-25_05"
 
 [deployment]
 run = ["sh", "-c", "php spark serve"]
+
+[workflows]
+runButton = "Start LMS Server"
+
+[[workflows.workflow]]
+name = "Start LMS Server"
+author = 46291866
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "php spark serve --host=0.0.0.0 --port=5000"

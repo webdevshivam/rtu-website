@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -33,12 +32,12 @@ class SubjectModel extends Model
                            ->select('s.*, sem.name as semester_name')
                            ->join('semesters sem', 'sem.id = s.semester_id')
                            ->where('s.is_active', 1);
-        
+
         if ($subjectId) {
             $builder->where('s.id', $subjectId);
             return $builder->get()->getRowArray();
         }
-        
+
         return $builder->orderBy('s.name')->get()->getResultArray();
     }
 }

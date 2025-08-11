@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Controllers;
@@ -17,7 +16,7 @@ class StudentController extends BaseController
     protected $subtopicModel;
     protected $contentModel;
     protected $lastVisitedModel;
-    
+
     public function __construct()
     {
         $this->subjectModel = new SubjectModel();
@@ -32,7 +31,7 @@ class StudentController extends BaseController
     {
         // For demo purposes, assume user ID 1 is logged in
         $userId = 1;
-        
+
         $data = [
             'title' => 'Student Dashboard - RTU LMS',
             'subjects' => $this->subjectModel->getSubjectsWithTopics(),
@@ -47,22 +46,22 @@ class StudentController extends BaseController
     {
         $subjects = $this->subjectModel->getSubjectWithHierarchy();
         $result = [];
-        
+
         foreach ($subjects as $subject) {
             $topics = $this->topicModel->getTopicsWithSubtopics($subject['id']);
             $subject['topics'] = $topics;
             $result[] = $subject;
         }
-        
+
         return $this->response->setJSON($result);
     }
 
     public function getSubtopicContent($subtopicId)
     {
         $userId = 1; // For demo purposes
-        
+
         $subtopic = $this->subtopicModel->getSubtopicWithContent($subtopicId);
-        
+
         if (!$subtopic) {
             return $this->response->setJSON(['error' => 'Subtopic not found'], 404);
         }
@@ -72,10 +71,10 @@ class StudentController extends BaseController
 
         // Get topic and subject info
         $topic = $this->db->table('topics t')
-                         ->select('t.*, s.name as subject_name, s.id as subject_id')
-                         ->join('subjects s', 's.id = t.subject_id')
-                         ->where('t.id', $subtopic['topic_id'])
-                         ->get()->getRowArray();
+            ->select('t.*, s.name as subject_name, s.id as subject_id')
+            ->join('subjects s', 's.id = t.subject_id')
+            ->where('t.id', $subtopic['topic_id'])
+            ->get()->getRowArray();
 
         $subtopic['topic'] = $topic;
 
@@ -92,7 +91,7 @@ class StudentController extends BaseController
     {
         $query = $this->request->getGet('q');
         $subjectId = $this->request->getGet('subject_id');
-        
+
         if (empty($query)) {
             return $this->response->setJSON([]);
         }
@@ -104,15 +103,15 @@ class StudentController extends BaseController
     public function downloadFile($contentId)
     {
         $content = $this->contentModel->find($contentId);
-        
+
         if (!$content || !$content['file_url']) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('File not found');
         }
 
         $this->contentModel->incrementDownloadCount($contentId);
-        
+
         $filePath = FCPATH . 'uploads/' . $content['file_url'];
-        
+
         if (!file_exists($filePath)) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('File not found');
         }

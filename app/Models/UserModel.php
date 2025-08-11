@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -14,8 +13,13 @@ class UserModel extends Model
     protected $useSoftDeletes = false;
     protected $protectFields = true;
     protected $allowedFields = [
-        'name', 'email', 'password_hash', 'role', 'avatar', 
-        'is_active', 'last_login'
+        'name',
+        'email',
+        'password_hash',
+        'role',
+        'avatar',
+        'is_active',
+        'last_login'
     ];
 
     protected bool $allowEmptyInserts = false;

@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -12,7 +11,11 @@ class TopicModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $allowedFields = [
-        'subject_id', 'name', 'description', 'order_index', 'is_active'
+        'subject_id',
+        'name',
+        'description',
+        'order_index',
+        'is_active'
     ];
 
     protected $useTimestamps = true;
@@ -21,20 +24,20 @@ class TopicModel extends Model
     public function getTopicsBySubject($subjectId)
     {
         return $this->where('subject_id', $subjectId)
-                   ->where('is_active', 1)
-                   ->orderBy('order_index', 'ASC')
-                   ->findAll();
+            ->where('is_active', 1)
+            ->orderBy('order_index', 'ASC')
+            ->findAll();
     }
 
     public function getTopicsWithSubtopics($subjectId)
     {
         $topics = $this->getTopicsBySubject($subjectId);
         $subtopicModel = new SubtopicModel();
-        
+
         foreach ($topics as &$topic) {
             $topic['subtopics'] = $subtopicModel->getSubtopicsByTopic($topic['id']);
         }
-        
+
         return $topics;
     }
 }

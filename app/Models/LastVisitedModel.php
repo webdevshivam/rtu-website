@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -18,7 +17,7 @@ class LastVisitedModel extends Model
     public function updateLastVisited($userId, $subtopicId)
     {
         $existing = $this->where('user_id', $userId)->first();
-        
+
         if ($existing) {
             return $this->update($existing['id'], [
                 'subtopic_id' => $subtopicId,
@@ -36,10 +35,10 @@ class LastVisitedModel extends Model
     public function getLastVisited($userId)
     {
         return $this->select('last_visited.*, subtopics.name as subtopic_name, topics.name as topic_name, subjects.name as subject_name, subjects.id as subject_id')
-                   ->join('subtopics', 'subtopics.id = last_visited.subtopic_id')
-                   ->join('topics', 'topics.id = subtopics.topic_id')
-                   ->join('subjects', 'subjects.id = topics.subject_id')
-                   ->where('last_visited.user_id', $userId)
-                   ->first();
+            ->join('subtopics', 'subtopics.id = last_visited.subtopic_id')
+            ->join('topics', 'topics.id = subtopics.topic_id')
+            ->join('subjects', 'subjects.id = topics.subject_id')
+            ->where('last_visited.user_id', $userId)
+            ->first();
     }
 }

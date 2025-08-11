@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Controllers;
@@ -12,7 +11,7 @@ class AdminController extends BaseController
     protected $userModel;
     protected $subjectModel;
     protected $contentModel;
-    
+
     public function __construct()
     {
         $this->userModel = new UserModel();
@@ -54,7 +53,7 @@ class AdminController extends BaseController
                 'user_role' => $user['role'],
                 'logged_in' => true
             ]);
-            
+
             return redirect()->to('/admin/dashboard');
         }
 

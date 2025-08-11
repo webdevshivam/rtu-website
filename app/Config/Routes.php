@@ -16,3 +16,11 @@ $routes->group('student', function($routes) {
     $routes->get('search', 'StudentController::search');
     $routes->get('download/(:num)', 'StudentController::downloadFile/$1');
 });
+
+// Admin Panel Routes
+$routes->group('admin', function($routes) {
+    $routes->get('login', 'AdminController::login');
+    $routes->post('authenticate', 'AdminController::authenticate');
+    $routes->get('dashboard', 'AdminController::index');
+    $routes->get('logout', 'AdminController::logout');
+});
